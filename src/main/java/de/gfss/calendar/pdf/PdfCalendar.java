@@ -36,16 +36,11 @@ public class PdfCalendar {
 		this.monthWidth = calendarWidth / calendar.getNumberOfMonths();
 	}
 
-	public void generateFile(File file) throws FileNotFoundException {
-
-		// Creating a PdfDocument object
-		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(file));
-
-		// Creating a Document object
-		Document doc = new Document(pdfDoc);
+	public void generateCalendarOn(Document doc) {
 
 		Paragraph titleParagraph = new Paragraph(calendar.getTitle());
 		titleParagraph.setTextAlignment(TextAlignment.CENTER);
+		titleParagraph.setBold();
 		doc.add(titleParagraph);
 
 		// Creating a table
@@ -59,10 +54,6 @@ public class PdfCalendar {
 
 		// Adding Table to document
 		doc.add(table);
-
-		// Closing the document
-		doc.close();
-		System.out.println("Table created successfully..");
 	}
 
 	private void printDayRow(Table table, int dayOfMonth) {

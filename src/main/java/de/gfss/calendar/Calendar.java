@@ -12,7 +12,7 @@ public class Calendar {
 	private final List<CalendarEvent> events = new ArrayList<>();
 	private final String title;
 	
-	public Calendar(String title, YearMonth firstMonth, int numberOfMonths) {
+	public Calendar(String title, YearMonth firstMonth, int numberOfMonths, List<CalendarEvent> calendarEvents) {
 		
 		for (int monthIndex = 0; monthIndex < numberOfMonths; monthIndex++) {
 			YearMonth yearMonth = firstMonth.plusMonths(monthIndex);
@@ -20,12 +20,19 @@ public class Calendar {
 			months.put(yearMonth, month);
 		}
 		
+		for (CalendarEvent event : calendarEvents) {
+			addEvent(event);
+		}
+		
 		this.title = title;
 	}
 	
-	public void addEvent(CalendarEvent event) {
+	private void addEvent(CalendarEvent event) {
 		events.add(event);
-		months.get(event.getYearMonth()).addEvent(event);
+		CalendarMonth calMonth = months.get(event.getYearMonth());
+		if (calMonth != null) {
+			calMonth.addEvent(event);
+		}
 	}
 	
 	public int getNumberOfMonths() {
