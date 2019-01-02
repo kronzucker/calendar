@@ -1,5 +1,7 @@
 package de.gfss.calendar.pdf;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Map;
 
 import com.itextpdf.kernel.colors.WebColors;
@@ -70,6 +72,22 @@ public class PdfCalendarDay {
 					
 					printDayNumber = !categoryFormattingInfo.insertIcon(dayNumberCell, COLUMN_DAY_NUMBER_WIDTH);
 				}
+				
+				Paragraph eventDescription = new Paragraph();
+				eventDescription.add(event.getDescription());
+				eventDescription.setBold();
+				eventDescription.setTextAlignment(TextAlignment.CENTER);
+				
+				Paragraph eventLocationTime = new Paragraph();
+				eventLocationTime.add(event.getLocation());
+				eventLocationTime.setFontSize(5);
+				eventLocationTime.setTextAlignment(TextAlignment.CENTER);
+				
+				if (event.getStartTime() != null) {
+					eventLocationTime.add(" ");
+					eventLocationTime.add(event.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")));
+				}
+				dayContentCell.add(eventDescription).add(eventLocationTime);
 			} 
 			
 			if (printDayNumber) {

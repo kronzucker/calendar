@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +28,9 @@ public class CalendarGeneratorTest {
 	public void canCreateEmptyCalendar() throws IOException {
 
 		List<CalendarEvent> calendarEvents = new ArrayList<>();
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 1, 5), null, "", "", "E1"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 2, 4), null, "", "", "E2"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 3, 6), null, "", "", "E2"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 1, 5), LocalTime.of(19,00), "JHV 2019", "Kirche", "E1"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 2, 4), null, "Tuppen", "Werner", "E2"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 3, 6), LocalTime.of(20,30), "Schützenfest", "Bracht", "E2"));
 		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 5, 7), null, "", "", "E2"));
 		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 11, 6), null, "", "", "E1"));
 		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 12, 22), null, "", "", "E2"));

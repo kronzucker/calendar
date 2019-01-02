@@ -8,17 +8,17 @@ public class CalendarEvent {
 
 	private final LocalDate date;
 	private final LocalTime startTime;
-	private final String location;
 	private final String description;
+	private final String location;
 	private final YearMonth yearMonth;
 	private final String eventCategory;
 	
-	public CalendarEvent(LocalDate date, LocalTime startTime, String location, String description, String eventCategory) {
+	public CalendarEvent(LocalDate date, LocalTime startTime, String description, String location, String eventCategory) {
 		super();
 		this.date = date;
 		this.startTime = startTime;
-		this.location = location;
 		this.description = description;
+		this.location = location;
 		this.yearMonth = YearMonth.of(date.getYear(), date.getMonth());
 		this.eventCategory = eventCategory;
 	}
