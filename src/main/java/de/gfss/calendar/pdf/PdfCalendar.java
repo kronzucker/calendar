@@ -27,10 +27,12 @@ public class PdfCalendar {
 	private final Calendar calendar;
 	private final float calendarWidth;
 	private final float monthWidth;
+	private final PdfEventCategories pdfEventCategories;
 
-	public PdfCalendar(Calendar calendar, float calendarWidth) {
+	public PdfCalendar(Calendar calendar, float calendarWidth, PdfEventCategories pdfEventCategories) {
 		this.calendar = calendar;
 		this.calendarWidth = calendarWidth;
+		this.pdfEventCategories = pdfEventCategories;
 		this.monthWidth = calendarWidth / calendar.getNumberOfMonths();
 	}
 
@@ -69,7 +71,7 @@ public class PdfCalendar {
 
 			CalendarDay calendarDay = month.getDay(dayOfMonth);
 
-			PdfCalendarDay pdfCalendarDay = new PdfCalendarDay(calendarDay, monthWidth);
+			PdfCalendarDay pdfCalendarDay = new PdfCalendarDay(calendarDay, monthWidth, pdfEventCategories);
 			pdfCalendarDay.addCellsToTable(table);
 		}
 	}

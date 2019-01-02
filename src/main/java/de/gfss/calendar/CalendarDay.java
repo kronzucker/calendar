@@ -25,10 +25,6 @@ public class CalendarDay {
 		return date.getDayOfWeek().equals(DayOfWeek.SUNDAY);
 	}
 	
-	public boolean hasEvent() {
-		return calendarEvent != null;
-	}
-	
 	public void setCalendarEvent(CalendarEvent calendarEvent) {
 		this.calendarEvent = calendarEvent;
 	}
