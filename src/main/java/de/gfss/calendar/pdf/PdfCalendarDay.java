@@ -28,9 +28,9 @@ public class PdfCalendarDay {
 	private final Cell dayNumberCell;
 	private final Cell dayContentCell;
 	private final CalendarDay calendarDay;
-	private final EventCategoryFormatting eventCategories;
+	private final EventCategoriesFormatting eventCategories;
 
-	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, EventCategoryFormatting eventCategories) {
+	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, EventCategoriesFormatting eventCategories) {
 		this.calendarDay = calendarDay;
 		this.eventCategories = eventCategories;
 
@@ -65,7 +65,7 @@ public class PdfCalendarDay {
 			CalendarEvent event = calendarDay.getCalendarEvent();
 			boolean printDayNumber = true;
 			if (event != null) {
-				EventCategoryFormattingInfo categoryFormattingInfo = eventCategories.ofCategory(event.getEventCategory());
+				EventCategoryFormatting categoryFormattingInfo = eventCategories.ofCategory(event.getEventCategory());
 				if (categoryFormattingInfo != null) {
 					categoryFormattingInfo.formatBackground(dayNumberCell);
 					categoryFormattingInfo.formatBackground(dayContentCell);
@@ -98,7 +98,6 @@ public class PdfCalendarDay {
 				dayNumberCell.add(p2);
 			}
 			
-//			dayContentCell.add(new Paragraph("nix").setTextAlignment(TextAlignment.CENTER));
 		}
 	}
 

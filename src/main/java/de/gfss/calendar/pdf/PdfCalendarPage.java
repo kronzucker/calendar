@@ -33,10 +33,10 @@ public class PdfCalendarPage {
 	private final Calendar calendar;
 	private final float displayCalendarWidth;
 	private final float monthWidth;
-	private final EventCategoryFormatting pdfEventCategories;
+	private final EventCategoriesFormatting pdfEventCategories;
 	private final CalendarPeriod displayPeriod;
 
-	public PdfCalendarPage(Calendar calendar, float calendarWidth, EventCategoryFormatting pdfEventCategories,
+	public PdfCalendarPage(Calendar calendar, float calendarWidth, EventCategoriesFormatting pdfEventCategories,
 			CalendarPeriod displayPeriod) {
 		this.calendar = calendar;
 		this.displayCalendarWidth = calendarWidth;
