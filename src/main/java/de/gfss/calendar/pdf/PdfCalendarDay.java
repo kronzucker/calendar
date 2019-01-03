@@ -4,6 +4,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 import com.itextpdf.kernel.colors.WebColors;
 import com.itextpdf.layout.Style;
 import com.itextpdf.layout.borders.Border;
@@ -65,12 +67,23 @@ public class PdfCalendarDay {
 			CalendarEvent event = calendarDay.getCalendarEvent();
 			boolean printDayNumber = true;
 			if (event != null) {
+				
 				EventCategoryFormatting categoryFormattingInfo = eventCategories.ofCategory(event.getEventCategory());
 				if (categoryFormattingInfo != null) {
-					categoryFormattingInfo.formatBackground(dayNumberCell);
-					categoryFormattingInfo.formatBackground(dayContentCell);
-					
-					printDayNumber = !categoryFormattingInfo.insertIcon(dayNumberCell, COLUMN_DAY_NUMBER_WIDTH);
+					if (categoryFormattingInfo.isBackgroundColorDefined()) {
+						dayNumberCell.setBackgroundColor(categoryFormattingInfo.getBackgroundColor());
+						dayContentCell.setBackgroundColor(categoryFormattingInfo.getBackgroundColor());
+					}
+
+					if (categoryFormattingInfo.isIconDefined()) {
+						Image icon = categoryFormattingInfo.getIcon();
+						float imageHeight = icon.getImageHeight();
+						
+						icon.scaleToFit(COLUMN_DAY_NUMBER_WIDTH, imageHeight);
+						dayNumberCell.add(icon);
+						dayNumberCell.setPaddingTop(1).setPaddingBottom(1);
+						printDayNumber = false;
+					}
 				}
 				
 				Paragraph eventDescription = new Paragraph();

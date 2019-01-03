@@ -3,7 +3,6 @@ package de.gfss.calendar.pdf;
 import org.springframework.util.StringUtils;
 
 import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 
 public class EventCategoryFormatting {
@@ -22,29 +21,21 @@ public class EventCategoryFormatting {
 	public String getCategory() {
 		return category;
 	}
-
-	public boolean formatBackground(Cell cell) {
-		if (!StringUtils.isEmpty(backgroundColor)) {
-			cell.setBackgroundColor(backgroundColor);
-			return true;
-		}
-		return false;
+	
+	public boolean isBackgroundColorDefined() {
+		return !StringUtils.isEmpty(backgroundColor);
 	}
-
-	public boolean insertIcon(Cell cell, float cellWidth) {
-		if (icon != null) {
-			float imageHeight = icon.getImageHeight();
-			
-			icon.scaleToFit(cellWidth, imageHeight);
-			cell.add(icon);
-			cell.setPaddingTop(1).setPaddingBottom(1);
-			return true;
-		}
-		return false;
+	
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 
 	public Image getIcon() {
 		return icon;
+	}
+	
+	public boolean isIconDefined() {
+		return icon != null;
 	}
 
 }
