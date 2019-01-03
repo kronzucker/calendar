@@ -29,11 +29,11 @@ public class PdfCalendarDay {
 	private static final float COLUMN_DAY_NUMBER_WIDTH = 20;
 	private static final float COLUMN_DAY_FONT_SIZE = 7.5f;
 
-	private final Style cellStyleDayNumber;
-	private final Style cellStyleDayContent;
+	private final Style cellStyleDayNumber = new Style();
+	private final Style cellStyleDayContent = new Style();
 
-	private final Cell dayNumberCell;
-	private final Cell dayContentCell;
+	private final Cell dayNumberCell = new Cell();
+	private final Cell dayContentCell = new Cell();
 	private final CalendarDay calendarDay;
 	private final EventCategoryFormatting eventCategoryFormattingInfo;
 
@@ -42,25 +42,7 @@ public class PdfCalendarDay {
 		this.eventCategoryFormattingInfo = (calendarDay == null) ? null
 				: eventCategories.ofEvent(calendarDay.getCalendarEvent());
 
-		// Cell Day Number
-		this.cellStyleDayNumber = new Style();
-		this.cellStyleDayNumber.setMaxWidth(COLUMN_DAY_NUMBER_WIDTH);
-		this.cellStyleDayNumber.setFontSize(COLUMN_DAY_FONT_SIZE);
-		this.cellStyleDayNumber.setTextAlignment(TextAlignment.CENTER);
-		this.cellStyleDayNumber.setPadding(0);
-		this.cellStyleDayNumber.setBorderRight(Border.NO_BORDER);
-
-		dayNumberCell = new Cell();
-		dayNumberCell.addStyle(cellStyleDayNumber);
-
-		// Cell Day Content
-		this.cellStyleDayContent = new Style();
-		this.cellStyleDayContent.setMaxWidth(dayWidth - COLUMN_DAY_NUMBER_WIDTH);
-		this.cellStyleDayContent.setFontSize(COLUMN_DAY_FONT_SIZE);
-		this.cellStyleDayContent.setBorderLeft(Border.NO_BORDER);
-
-		this.dayContentCell = new Cell();
-		dayContentCell.addStyle(cellStyleDayContent);
+		initializeCellsAndStyles(dayWidth);
 
 		// Check for Valid Date
 		if (calendarDay == null) {
@@ -69,13 +51,30 @@ public class PdfCalendarDay {
 			return;
 		}
 
-		CalendarEvent calendarEvent = calendarDay.getCalendarEvent();
-
 		markCalendarDayAsHoliday();
 		markCalendarDayAsWeekend();
 		markCalendarDayWithEventCategoryColor();
 		fillIconOrDayNumber();
 		fillEventDescription();
+
+	}
+
+	private void initializeCellsAndStyles(float dayWidth) {
+		// Cell Day Number
+		this.cellStyleDayNumber.setMaxWidth(COLUMN_DAY_NUMBER_WIDTH);
+		this.cellStyleDayNumber.setFontSize(COLUMN_DAY_FONT_SIZE);
+		this.cellStyleDayNumber.setTextAlignment(TextAlignment.CENTER);
+		this.cellStyleDayNumber.setPadding(0);
+		this.cellStyleDayNumber.setBorderRight(Border.NO_BORDER);
+
+		dayNumberCell.addStyle(cellStyleDayNumber);
+
+		// Cell Day Content
+		this.cellStyleDayContent.setMaxWidth(dayWidth - COLUMN_DAY_NUMBER_WIDTH);
+		this.cellStyleDayContent.setFontSize(COLUMN_DAY_FONT_SIZE);
+		this.cellStyleDayContent.setBorderLeft(Border.NO_BORDER);
+
+		dayContentCell.addStyle(cellStyleDayContent);
 
 	}
 
