@@ -28,9 +28,9 @@ public class PdfCalendarDay {
 	private final Cell dayNumberCell;
 	private final Cell dayContentCell;
 	private final CalendarDay calendarDay;
-	private final PdfEventCategories eventCategories;
+	private final EventCategoryFormatting eventCategories;
 
-	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, PdfEventCategories eventCategories) {
+	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, EventCategoryFormatting eventCategories) {
 		this.calendarDay = calendarDay;
 		this.eventCategories = eventCategories;
 

@@ -8,6 +8,9 @@ import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.kernel.colors.WebColors;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -21,19 +24,27 @@ import com.itextpdf.layout.property.TextAlignment;
 import de.gfss.calendar.Calendar;
 import de.gfss.calendar.CalendarDay;
 import de.gfss.calendar.CalendarMonth;
+import de.gfss.calendar.CalendarPeriod;
 
-public class PdfCalendar {
+public class PdfCalendarPage {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(PdfCalendarPage.class);
 
 	private final Calendar calendar;
-	private final float calendarWidth;
+	private final float displayCalendarWidth;
 	private final float monthWidth;
-	private final PdfEventCategories pdfEventCategories;
+	private final EventCategoryFormatting pdfEventCategories;
+	private final CalendarPeriod displayPeriod;
 
-	public PdfCalendar(Calendar calendar, float calendarWidth, PdfEventCategories pdfEventCategories) {
+	public PdfCalendarPage(Calendar calendar, float calendarWidth, EventCategoryFormatting pdfEventCategories,
+			CalendarPeriod displayPeriod) {
 		this.calendar = calendar;
-		this.calendarWidth = calendarWidth;
+		this.displayCalendarWidth = calendarWidth;
 		this.pdfEventCategories = pdfEventCategories;
-		this.monthWidth = calendarWidth / calendar.getNumberOfMonths();
+		this.displayPeriod = displayPeriod;
+		this.monthWidth = calendarWidth / displayPeriod.getNumberOfMonths();
+		
+		LOG.debug("new PdfCalenderPage: {}", displayPeriod.toString());
 	}
 
 	public void generateCalendarOn(Document doc) {
@@ -44,8 +55,8 @@ public class PdfCalendar {
 		doc.add(titleParagraph);
 
 		// Creating a table
-		Table table = new Table(calendar.getNumberOfMonths() * 2);
-		table.setWidth(calendarWidth);
+		Table table = new Table(displayPeriod.getNumberOfMonths() * 2);
+		table.setWidth(displayCalendarWidth);
 
 		printHeader(table);
 		for (int dayOfMonth = 1; dayOfMonth <= 31; dayOfMonth++) {
@@ -58,24 +69,26 @@ public class PdfCalendar {
 
 	private void printDayRow(Table table, int dayOfMonth) {
 
-		for (CalendarMonth month : calendar.getMonths()) {
+		for (YearMonth monthToDisplay : displayPeriod) {
 
-			CalendarDay calendarDay = month.getDay(dayOfMonth);
+			LOG.debug(monthToDisplay.toString());
+			
+			CalendarMonth calendarMonth = calendar.getMonth(monthToDisplay);
+			CalendarDay calendarDay = calendarMonth.getDay(dayOfMonth);
 
-			PdfCalendarDay pdfCalendarDay = new PdfCalendarDay(calendarDay, monthWidth, pdfEventCategories);
-			pdfCalendarDay.addCellsToTable(table);
+			PdfCalendarDay pdfCalendarDayCells = new PdfCalendarDay(calendarDay, monthWidth, pdfEventCategories);
+			pdfCalendarDayCells.addCellsToTable(table);
 		}
 	}
 
 	private void printHeader(Table table) {
 
-		for (CalendarMonth month : calendar.getMonths()) {
+		for (YearMonth monthToDisplay : displayPeriod) {
 
 			Cell headerCell = new Cell(1, 2);
 			headerCell.setTextAlignment(TextAlignment.CENTER);
 
-			headerCell
-					.add(new Paragraph(month.getYearMonth().getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN)));
+			headerCell.add(new Paragraph(monthToDisplay.getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN)));
 			table.addHeaderCell(headerCell);
 
 		}

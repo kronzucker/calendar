@@ -43,8 +43,9 @@ public class Calendar {
 		return title;
 	}
 
-	public Collection<CalendarMonth> getMonths() {
-		return months.values();
+	public CalendarMonth getMonth(YearMonth yearMonth) {
+		return months.get(yearMonth);
 	}
+	
 	
 }

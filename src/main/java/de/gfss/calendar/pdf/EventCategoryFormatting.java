@@ -3,11 +3,11 @@ package de.gfss.calendar.pdf;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PdfEventCategories {
+public class EventCategoryFormatting {
 
 	private final Map<String, EventCategoryFormattingInfo> eventCategoryFormattingInfo = new HashMap<>();
 	
-	public PdfEventCategories() {
+	public EventCategoryFormatting() {
 	}
 	
 	public void put(String category, EventCategoryFormattingInfo categoryFormattingInfo) {
