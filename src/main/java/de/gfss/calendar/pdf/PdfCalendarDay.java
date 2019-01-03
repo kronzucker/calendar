@@ -4,8 +4,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.WebColors;
 import com.itextpdf.layout.Style;
 import com.itextpdf.layout.borders.Border;
@@ -21,6 +24,8 @@ import de.gfss.calendar.CalendarEvent;
 
 public class PdfCalendarDay {
 
+	private static final Logger LOG = LoggerFactory.getLogger(PdfCalendarDay.class);
+
 	private static final float COLUMN_DAY_NUMBER_WIDTH = 20;
 	private static final float COLUMN_DAY_FONT_SIZE = 7.5f;
 
@@ -30,11 +35,12 @@ public class PdfCalendarDay {
 	private final Cell dayNumberCell;
 	private final Cell dayContentCell;
 	private final CalendarDay calendarDay;
-	private final EventCategoriesFormatting eventCategories;
+	private final EventCategoryFormatting eventCategoryFormattingInfo;
 
 	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, EventCategoriesFormatting eventCategories) {
 		this.calendarDay = calendarDay;
-		this.eventCategories = eventCategories;
+		this.eventCategoryFormattingInfo = (calendarDay == null) ? null
+				: eventCategories.ofEvent(calendarDay.getCalendarEvent());
 
 		// Cell Day Number
 		this.cellStyleDayNumber = new Style();
@@ -60,69 +66,101 @@ public class PdfCalendarDay {
 		if (calendarDay == null) {
 			dayNumberCell.setBorder(Border.NO_BORDER);
 			dayContentCell.setBorder(Border.NO_BORDER);
+			return;
+		}
+
+		CalendarEvent calendarEvent = calendarDay.getCalendarEvent();
+
+		markCalendarDayAsHoliday();
+		markCalendarDayAsWeekend();
+		markCalendarDayWithEventCategoryColor();
+		fillIconOrDayNumber();
+		fillEventDescription();
+
+	}
+
+	private void fillEventDescription() {
+		if (!calendarDay.hasEvent()) {
+			return;
+		}
+
+		CalendarEvent event = calendarDay.getCalendarEvent();
+
+		Paragraph eventDescription = new Paragraph();
+		eventDescription.add(event.getDescription());
+		eventDescription.setBold();
+		eventDescription.setTextAlignment(TextAlignment.CENTER);
+
+		Paragraph eventLocationTime = new Paragraph();
+		eventLocationTime.add(event.getLocation());
+		eventLocationTime.setFontSize(5);
+		eventLocationTime.setTextAlignment(TextAlignment.CENTER);
+
+		if (calendarDay.getCalendarEvent().getStartTime() != null) {
+			eventLocationTime.add(" ");
+			eventLocationTime.add(event.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")));
+		}
+		dayContentCell.add(eventDescription).add(eventLocationTime);
+	}
+
+	private void fillIconOrDayNumber() {
+
+		if (calendarDay.hasEvent() && (eventCategoryFormattingInfo != null)
+				&& (eventCategoryFormattingInfo.isIconDefined())) {
+			Image icon = eventCategoryFormattingInfo.getIcon();
+			float imageHeight = icon.getImageHeight();
+
+			icon.scaleToFit(COLUMN_DAY_NUMBER_WIDTH, imageHeight);
+			dayNumberCell.add(icon);
+			dayNumberCell.setPaddingTop(1).setPaddingBottom(1);
+
 		} else {
-			addWeekendStyle(dayNumberCell);
-			addWeekendStyle(dayContentCell);
+			Paragraph paragraphDayNumber = new Paragraph(CalendarFormatter.getMonthTwoDigit(calendarDay.getDate()));
+			dayNumberCell.add(paragraphDayNumber);
 
-			CalendarEvent event = calendarDay.getCalendarEvent();
-			boolean printDayNumber = true;
-			if (event != null) {
-				
-				EventCategoryFormatting categoryFormattingInfo = eventCategories.ofCategory(event.getEventCategory());
-				if (categoryFormattingInfo != null) {
-					if (categoryFormattingInfo.isBackgroundColorDefined()) {
-						dayNumberCell.setBackgroundColor(categoryFormattingInfo.getBackgroundColor());
-						dayContentCell.setBackgroundColor(categoryFormattingInfo.getBackgroundColor());
-					}
-
-					if (categoryFormattingInfo.isIconDefined()) {
-						Image icon = categoryFormattingInfo.getIcon();
-						float imageHeight = icon.getImageHeight();
-						
-						icon.scaleToFit(COLUMN_DAY_NUMBER_WIDTH, imageHeight);
-						dayNumberCell.add(icon);
-						dayNumberCell.setPaddingTop(1).setPaddingBottom(1);
-						printDayNumber = false;
-					}
-				}
-				
-				Paragraph eventDescription = new Paragraph();
-				eventDescription.add(event.getDescription());
-				eventDescription.setBold();
-				eventDescription.setTextAlignment(TextAlignment.CENTER);
-				
-				Paragraph eventLocationTime = new Paragraph();
-				eventLocationTime.add(event.getLocation());
-				eventLocationTime.setFontSize(5);
-				eventLocationTime.setTextAlignment(TextAlignment.CENTER);
-				
-				if (event.getStartTime() != null) {
-					eventLocationTime.add(" ");
-					eventLocationTime.add(event.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")));
-				}
-				dayContentCell.add(eventDescription).add(eventLocationTime);
-			} 
-			
-			if (printDayNumber) {
-				Paragraph p1 = new Paragraph(CalendarFormatter.getMonthTwoDigit(calendarDay.getDate()));
-				dayNumberCell.add(p1);
-				
-				Paragraph p2 = new Paragraph(CalendarFormatter.getMonthTwoCharacters(calendarDay.getDate()));
-				dayNumberCell.add(p2);
-			}
-			
+			Paragraph paragraphDayName = new Paragraph(CalendarFormatter.getMonthTwoCharacters(calendarDay.getDate()));
+			dayNumberCell.add(paragraphDayName);
 		}
 	}
 
-	private void addWeekendStyle(Cell cell) {
-
-		if (calendarDay.isSaturday()) {
-			cell.setBackgroundColor(WebColors.getRGBColor("#f2f2f2"));
+	private void markCalendarDayWithEventCategoryColor() {
+		if (!calendarDay.hasEvent()) {
+			return;
 		}
 
-		if (calendarDay.isSunday()) {
-			cell.setBackgroundColor(WebColors.getRGBColor("#e6e6e6"));
+		if (eventCategoryFormattingInfo == null) {
+			LOG.warn("event category {} konnte nicht ermittelt werden",
+					calendarDay.getCalendarEvent().getEventCategory());
+			return;
 		}
+
+		if (eventCategoryFormattingInfo.isBackgroundColorDefined()) {
+			dayNumberCell.setBackgroundColor(eventCategoryFormattingInfo.getBackgroundColor());
+			dayContentCell.setBackgroundColor(eventCategoryFormattingInfo.getBackgroundColor());
+		}
+
+	}
+
+	private void markCalendarDayAsHoliday() {
+		if (!calendarDay.isNrwHoliday()) {
+			return;
+		}
+
+		Color lightGrayBlue = WebColors.getRGBColor("#c1d0f0");
+		dayNumberCell.setBackgroundColor(lightGrayBlue);
+	}
+
+	private void markCalendarDayAsWeekend() {
+		if (!calendarDay.isWeekend()) {
+			return;
+		}
+
+		Color backgroundColor;
+		backgroundColor = calendarDay.isSaturday() ? WebColors.getRGBColor("#f2f2f2") : null;
+		backgroundColor = calendarDay.isSunday() ? WebColors.getRGBColor("#e6e6e6") : null;
+
+		dayNumberCell.setBackgroundColor(backgroundColor);
+		dayContentCell.setBackgroundColor(backgroundColor);
 	}
 
 	public void addCellsToTable(Table table) {

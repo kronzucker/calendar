@@ -32,5 +32,17 @@ public class CalendarDay {
 	public CalendarEvent getCalendarEvent() {
 		return calendarEvent;
 	}
+
+	public boolean isWeekend() {
+		return isSaturday() || isSunday();
+	}
+
+	public boolean isNrwHoliday() {
+		return false;
+	}
+
+	public boolean hasEvent() {
+		return calendarEvent != null;
+	}
 	
 }
