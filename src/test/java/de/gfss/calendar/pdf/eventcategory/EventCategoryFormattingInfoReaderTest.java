@@ -24,7 +24,7 @@ public class EventCategoryFormattingInfoReaderTest {
 				.read(categoryFormattingCsvFile);
 		
 		// then
-		assertThat(eventCategoryFormattingInfo.size(), equalTo(17));
+		assertThat(eventCategoryFormattingInfo.size(), equalTo(19));
 	}
 
 }

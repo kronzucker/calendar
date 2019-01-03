@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 
+import lombok.Builder;
+
+@Builder
 public class CalendarEvent {
 
 	private final LocalDate date;
 	private final LocalTime startTime;
 	private final String description;
 	private final String location;
-	private final YearMonth yearMonth;
 	private final String eventCategory;
 	
 	public CalendarEvent(LocalDate date, LocalTime startTime, String description, String location, String eventCategory) {
@@ -19,12 +21,11 @@ public class CalendarEvent {
 		this.startTime = startTime;
 		this.description = description;
 		this.location = location;
-		this.yearMonth = YearMonth.of(date.getYear(), date.getMonth());
 		this.eventCategory = eventCategory;
 	}
 	
 	public YearMonth getYearMonth() {
-		return yearMonth;
+		return YearMonth.of(date.getYear(), date.getMonth());
 	}
 	
 	public LocalDate getDate() {

@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -40,11 +42,18 @@ public class EventCategoriesFormattingCsvReader {
 		while (iterator.hasNext()) {
 			CsvFormat line = iterator.next();
 
-			Color backgroundColor = WebColors.getRGBColor(line.background_color);
-			URL iconFileURL = EventCategoriesFormattingCsvReader.class.getClassLoader()
-					.getResource("eventcategory/" + line.icon);
-			ImageData iconData = ImageDataFactory.create(iconFileURL);
-			Image icon = new Image(iconData);
+			Color backgroundColor = null;
+			if (!StringUtils.isEmpty(line.background_color)) {
+				backgroundColor = WebColors.getRGBColor(line.background_color);
+			}
+
+			Image icon = null;
+			if (!StringUtils.isEmpty(line.icon)) {
+				URL iconFileURL = EventCategoriesFormattingCsvReader.class.getClassLoader()
+						.getResource("eventcategory/" + line.icon);
+				ImageData iconData = ImageDataFactory.create(iconFileURL);
+				icon = new Image(iconData);
+			}
 
 			EventCategoryFormatting eventCategoryFormattingInfo = new EventCategoryFormatting(line.category,
 					backgroundColor, icon);

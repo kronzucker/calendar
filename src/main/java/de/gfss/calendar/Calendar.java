@@ -2,7 +2,6 @@ package de.gfss.calendar;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -12,10 +11,9 @@ public class Calendar {
 	private final List<CalendarEvent> events = new ArrayList<>();
 	private final String title;
 	
-	public Calendar(String title, YearMonth firstMonth, int numberOfMonths, List<CalendarEvent> calendarEvents) {
+	public Calendar(String title, CalendarPeriod calendarPeriod, List<CalendarEvent> calendarEvents) {
 		
-		for (int monthIndex = 0; monthIndex < numberOfMonths; monthIndex++) {
-			YearMonth yearMonth = firstMonth.plusMonths(monthIndex);
+		for (YearMonth yearMonth : calendarPeriod) {
 			CalendarMonth month = new CalendarMonth(yearMonth);
 			months.put(yearMonth, month);
 		}
