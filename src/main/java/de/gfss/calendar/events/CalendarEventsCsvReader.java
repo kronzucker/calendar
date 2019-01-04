@@ -18,8 +18,6 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
-import de.gfss.calendar.CalendarEvent;
-
 public class CalendarEventsCsvReader {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CalendarEventsCsvReader.class);
@@ -29,7 +27,8 @@ public class CalendarEventsCsvReader {
 		public String start_time;
 		public String description;
 		public String location;
-		public String event_category;
+		public String category;
+		public String activity;
 	}
 
 	public static List<CalendarEvent> read(InputStream stream) throws IOException {
@@ -54,11 +53,13 @@ public class CalendarEventsCsvReader {
 			if (!StringUtils.isEmpty(line.start_time)) {
 				startTime = LocalTime.parse(line.start_time, DateTimeFormatter.ofPattern("HH:mm"));
 			}
+			
+			EventCategory category = EventCategory.fromString(line.category);
 
 			CalendarEvent calendarEvent = CalendarEvent.builder()
 					.date(LocalDate.parse(line.date, DateTimeFormatter.ofPattern("dd.MM.yyyy")))
-					.description(line.description).eventCategory(line.event_category).location(line.location)
-					.startTime(startTime).build();
+					.description(line.description).category(category).location(line.location)
+					.startTime(startTime).activity(line.activity).build();
 
 			calendarEvents.add(calendarEvent);
 		}

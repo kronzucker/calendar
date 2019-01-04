@@ -3,6 +3,8 @@ package de.gfss.calendar;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import de.gfss.calendar.events.CalendarEvent;
+
 public class CalendarDay {
 
 	private final LocalDate date;

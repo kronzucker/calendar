@@ -1,30 +1,30 @@
-date;start_time;description;location;event_category
-01.01.2018;;Neujahr;;feiertag
-06.01.2018;;Reuver;Neujahrskonzert;musik
-19.01.2018;19:00;JHV;Kirche;mitglieder
-04.02.2018;10:30;Vorstand;Schießstand;vorstand
-08.02.2018;;Altweiber;;
-12.02.2018;;Rosenmontag;;
-16.02.2018;20:00;Tuppen;Zum Treffpunkt;tuppen
-16.03.2018;20:00;Tuppen;Schießstand;tuppen
-30.03.2018;;Karfreitag;;feiertag
-01.04.2018;;Ostersonntag;;feiertag
-02.04.2018;11:00;Osterschießen;Schießstand;schiessen
-08.04.2019;10:30;Vorstand;Schießstand;vorstand
-20.04.2018;20:00;Tuppen;Zum Treffpunkt;tuppen
-22.04.2018;16:00;MGV Konzert;Bürgersaal Bracht;musik
-01.05.2018;18:00;Maiandacht;Kirche;kirche
-10.05.2018;;SF Bracht;Klompenball;sf_sonstige
-13.05.2018;;Schützenfest;Bracht;schuetzenfest
-14.05.2018;;Schützenfest;Bracht;schuetzenfest
-28.05.2018;20:00;Tuppen;Schießstand;tuppen
-20.05.2018;;Pfingsten;;feiertag
-21.05.2018;;Pfingsten;;feiertag
-31.05.2018;;Fronleichnam;;kirche
-08.06.2018;20:00;Mitglieder;Schießstand;mitglieder
-15.06.2018;19:30;Tuppen;Zum Treffpunkt;tuppen
-16.06.2018;;SF Oebel;Schützenball;schuetzenfest
-17.06.2018;;SF Oebel;;sf_sonstige
-18.06.2018;;SF Oebel;Vogelschuss;sf_sonstige
-23.06.2018;;Sommerfest;GV Waldesgrün;musik
-24.06.2018;10:30;Vorstand;Schießstand;vorstand
+date;start_time;description;location;category;activity;
+01.01.2018;;Neujahr;;holiday;feiertag
+06.01.2018;;Reuver;Neujahrskonzert;info;musik
+19.01.2018;19:00;JHV;Kirche;highlight;mitglieder
+04.02.2018;10:30;Vorstand;Schießstand;event;vorstand
+08.02.2018;;Altweiber;;info;
+12.02.2018;;Rosenmontag;;info;
+16.02.2018;20:00;Tuppen;Zum Treffpunkt;event;tuppen
+16.03.2018;20:00;Tuppen;Schießstand;event;tuppen
+30.03.2018;;Karfreitag;;holiday;feiertag
+01.04.2018;;Ostersonntag;;holiday;feiertag
+02.04.2018;11:00;Osterschießen;Schießstand;event;schiessen
+08.04.2019;10:30;Vorstand;Schießstand;event;vorstand
+20.04.2018;20:00;Tuppen;Zum Treffpunkt;event;tuppen
+22.04.2018;16:00;MGV Konzert;Bürgersaal Bracht;info;musik
+01.05.2018;18:00;Maiandacht;Kirche;highlight;kirche
+10.05.2018;;SF Bracht;Klompenball;info;sf_sonstige
+13.05.2018;;Schützenfest;Bracht;highlight;schuetzenfest
+14.05.2018;;Schützenfest;Bracht;highlight;schuetzenfest
+28.05.2018;20:00;Tuppen;Schießstand;event;tuppen
+20.05.2018;;Pfingsten;;holiday;feiertag
+21.05.2018;;Pfingsten;;holiday;feiertag
+31.05.2018;;Fronleichnam;;highlight;kirche
+08.06.2018;20:00;Mitglieder;Schießstand;highlight;mitglieder
+15.06.2018;19:30;Tuppen;Zum Treffpunkt;event;tuppen
+16.06.2018;;SF Oebel;Schützenball;highlight;schuetzenfest
+17.06.2018;;SF Oebel;;info;sf_sonstige
+18.06.2018;;SF Oebel;Vogelschuss;info;sf_sonstige
+23.06.2018;;Sommerfest;GV Waldesgrün;info;musik
+24.06.2018;10:30;Vorstand;Schießstand;event;versammlung

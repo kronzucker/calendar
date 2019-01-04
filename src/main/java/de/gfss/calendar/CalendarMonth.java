@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.TreeMap;
 
+import de.gfss.calendar.events.CalendarEvent;
+
 public class CalendarMonth {
 
 	private final YearMonth yearMonth;

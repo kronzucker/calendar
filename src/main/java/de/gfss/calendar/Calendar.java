@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import de.gfss.calendar.events.CalendarEvent;
+
 public class Calendar {
 
 	private final TreeMap<YearMonth, CalendarMonth> months = new TreeMap<>();

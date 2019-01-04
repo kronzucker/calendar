@@ -1,4 +1,4 @@
-package de.gfss.calendar.pdf.eventcategory;
+package de.gfss.calendar.pdf.eventactivities;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,49 +18,43 @@ import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.WebColors;
 import com.itextpdf.layout.element.Image;
 
-import de.gfss.calendar.pdf.EventCategoriesFormatting;
-import de.gfss.calendar.pdf.EventCategoryFormatting;
+import de.gfss.calendar.pdf.EventActivititesFormatting;
+import de.gfss.calendar.pdf.EventActivityFormatting;
 
-public class EventCategoriesFormattingCsvReader {
+public class EventActivitiesFormattingCsvReader {
 
 	private static final class CsvFormat {
-		public String category;
-		public String background_color;
+		public String activity;
 		public String icon;
 	}
 
-	public static EventCategoriesFormatting read(InputStream stream) throws IOException {
+	public static EventActivititesFormatting read(InputStream stream) throws IOException {
 
-		EventCategoriesFormatting eventCategoryFormattingInfos = new EventCategoriesFormatting();
+		EventActivititesFormatting eventActivitiesFormattingInfos = new EventActivititesFormatting();
 
 		CsvMapper mapper = new CsvMapper();
 
-		CsvSchema csvSchema = mapper.schemaFor(CsvFormat.class).withColumnSeparator(';').withHeader().withColumnReordering(true);
+		CsvSchema csvSchema = mapper.schemaFor(CsvFormat.class).withColumnSeparator(';').withHeader()
+				.withColumnReordering(true);
 		ObjectReader reader = mapper.readerFor(CsvFormat.class).with(csvSchema);
 
 		MappingIterator<CsvFormat> iterator = reader.readValues(stream);
 		while (iterator.hasNext()) {
 			CsvFormat line = iterator.next();
 
-			Color backgroundColor = null;
-			if (!StringUtils.isEmpty(line.background_color)) {
-				backgroundColor = WebColors.getRGBColor(line.background_color);
-			}
-
 			Image icon = null;
 			if (!StringUtils.isEmpty(line.icon)) {
-				URL iconFileURL = EventCategoriesFormattingCsvReader.class.getClassLoader()
-						.getResource("eventcategory/" + line.icon);
+				URL iconFileURL = EventActivitiesFormattingCsvReader.class.getClassLoader()
+						.getResource("activities/" + line.icon);
 				ImageData iconData = ImageDataFactory.create(iconFileURL);
 				icon = new Image(iconData);
 			}
 
-			EventCategoryFormatting eventCategoryFormattingInfo = new EventCategoryFormatting(line.category,
-					backgroundColor, icon);
-			eventCategoryFormattingInfos.put(eventCategoryFormattingInfo);
+			EventActivityFormatting eventActivityFormattingInfo = new EventActivityFormatting(line.activity, icon);
+			eventActivitiesFormattingInfos.put(eventActivityFormattingInfo);
 		}
 
-		return eventCategoryFormattingInfos;
+		return eventActivitiesFormattingInfos;
 	}
 
 }

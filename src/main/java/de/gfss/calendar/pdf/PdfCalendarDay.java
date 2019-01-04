@@ -20,7 +20,7 @@ import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 
 import de.gfss.calendar.CalendarDay;
-import de.gfss.calendar.CalendarEvent;
+import de.gfss.calendar.events.CalendarEvent;
 
 public class PdfCalendarDay {
 
@@ -35,12 +35,13 @@ public class PdfCalendarDay {
 	private final Cell dayNumberCell = new Cell();
 	private final Cell dayContentCell = new Cell();
 	private final CalendarDay calendarDay;
-	private final EventCategoryFormatting eventCategoryFormattingInfo;
+	private final EventActivityFormatting eventActivityFormattingInfo;
 
-	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth, EventCategoriesFormatting eventCategories) {
+	public PdfCalendarDay(CalendarDay calendarDay, float dayWidth,
+			EventActivititesFormatting eventActivitiesFormatting) {
 		this.calendarDay = calendarDay;
-		this.eventCategoryFormattingInfo = (calendarDay == null) ? null
-				: eventCategories.ofEvent(calendarDay.getCalendarEvent());
+		this.eventActivityFormattingInfo = (calendarDay == null) ? null
+				: eventActivitiesFormatting.ofEvent(calendarDay.getCalendarEvent());
 
 		initializeCellsAndStyles(dayWidth);
 
@@ -104,9 +105,9 @@ public class PdfCalendarDay {
 
 	private void fillIconOrDayNumber() {
 
-		if (calendarDay.hasEvent() && (eventCategoryFormattingInfo != null)
-				&& (eventCategoryFormattingInfo.isIconDefined())) {
-			Image icon = eventCategoryFormattingInfo.getIcon();
+		if (calendarDay.hasEvent() && (eventActivityFormattingInfo != null)
+				&& (eventActivityFormattingInfo.isIconDefined())) {
+			Image icon = eventActivityFormattingInfo.getIcon();
 			float imageHeight = icon.getImageHeight();
 
 			icon.scaleToFit(COLUMN_DAY_NUMBER_WIDTH, imageHeight);
@@ -123,21 +124,13 @@ public class PdfCalendarDay {
 	}
 
 	private void markCalendarDayWithEventCategoryColor() {
+
 		if (!calendarDay.hasEvent()) {
 			return;
 		}
 
-		if (eventCategoryFormattingInfo == null) {
-			LOG.warn("event category {} konnte nicht ermittelt werden",
-					calendarDay.getCalendarEvent().getEventCategory());
-			return;
-		}
-
-		if (eventCategoryFormattingInfo.isBackgroundColorDefined()) {
-			dayNumberCell.setBackgroundColor(eventCategoryFormattingInfo.getBackgroundColor());
-			dayContentCell.setBackgroundColor(eventCategoryFormattingInfo.getBackgroundColor());
-		}
-
+		EventCategoryCellFormatter.formatCell(dayNumberCell, calendarDay.getCalendarEvent());
+		EventCategoryCellFormatter.formatCell(dayContentCell, calendarDay.getCalendarEvent());
 	}
 
 	private void markCalendarDayAsHoliday() {
@@ -150,16 +143,8 @@ public class PdfCalendarDay {
 	}
 
 	private void markCalendarDayAsWeekend() {
-		if (!calendarDay.isWeekend()) {
-			return;
-		}
-
-		Color backgroundColor;
-		backgroundColor = calendarDay.isSaturday() ? WebColors.getRGBColor("#f2f2f2") : null;
-		backgroundColor = calendarDay.isSunday() ? WebColors.getRGBColor("#e6e6e6") : null;
-
-		dayNumberCell.setBackgroundColor(backgroundColor);
-		dayContentCell.setBackgroundColor(backgroundColor);
+		WeekendCellFormatter.formatCell(dayNumberCell, calendarDay);
+		WeekendCellFormatter.formatCell(dayContentCell, calendarDay);
 	}
 
 	public void addCellsToTable(Table table) {

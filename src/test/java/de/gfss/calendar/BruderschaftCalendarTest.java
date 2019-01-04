@@ -21,11 +21,13 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 
-import de.gfss.calendar.pdf.EventCategoryFormatting;
+import de.gfss.calendar.pdf.EventActivityFormatting;
 import de.gfss.calendar.pdf.PdfCalendarPage;
-import de.gfss.calendar.pdf.eventcategory.EventCategoriesFormattingCsvReader;
+import de.gfss.calendar.pdf.eventactivities.EventActivitiesFormattingCsvReader;
+import de.gfss.calendar.events.CalendarEvent;
 import de.gfss.calendar.events.CalendarEventsCsvReader;
-import de.gfss.calendar.pdf.EventCategoriesFormatting;
+import de.gfss.calendar.events.EventCategory;
+import de.gfss.calendar.pdf.EventActivititesFormatting;
 
 public class BruderschaftCalendarTest {
 
@@ -34,21 +36,21 @@ public class BruderschaftCalendarTest {
 
 		// categories
 		FileInputStream categoryFormattingCsvFile = new FileInputStream(
-				"src/main/resources/eventcategory/eventcategories.csv");
-		EventCategoriesFormatting eventCategoriesFormatting = EventCategoriesFormattingCsvReader
+				"src/main/resources/activities/activities.csv");
+		EventActivititesFormatting eventCategoriesFormatting = EventActivitiesFormattingCsvReader
 				.read(categoryFormattingCsvFile);
 
 		// events
 		List<CalendarEvent> calendarEvents = new ArrayList<>();
 		calendarEvents
-				.add(new CalendarEvent(LocalDate.of(2019, 1, 5), LocalTime.of(19, 00), "JHV 2019", "Kirche", "E1"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 2, 4), null, "Tuppen", "Werner", "E2"));
+				.add(new CalendarEvent(LocalDate.of(2019, 1, 5), LocalTime.of(19, 00), "JHV 2019", "Kirche", EventCategory.HIGHLIGHT, "E1"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 2, 4), null, "Tuppen", "Werner", EventCategory.EVENT, "E2"));
 		calendarEvents
-				.add(new CalendarEvent(LocalDate.of(2019, 3, 6), LocalTime.of(20, 30), "Schützenfest", "Bracht", "schuetzenfest"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 5, 7), null, "", "", "bierchen"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 11, 6), null, "", "", "sf_sonstige"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 12, 22), null, "", "", "stmartin"));
-		calendarEvents.add(new CalendarEvent(LocalDate.of(2020, 1, 22), null, "", "", "tuppen"));
+				.add(new CalendarEvent(LocalDate.of(2019, 3, 6), LocalTime.of(20, 30), "Schützenfest", "Bracht", EventCategory.HIGHLIGHT, "schuetzenfest"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 5, 7), null, "", "", EventCategory.INFO, "bierchen"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 11, 6), null, "", "", EventCategory.INFO, "sf_sonstige"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 12, 22), null, "", "", EventCategory.INFO, "stmartin"));
+		calendarEvents.add(new CalendarEvent(LocalDate.of(2020, 1, 22), null, "", "", EventCategory.EVENT, "tuppen"));
 
 		CalendarPeriod calendarPeriod = CalendarPeriod.of(2019, 1, 13);
 		Calendar calendar = new Calendar("Termine Bruderschaft Lüttelbracht-Genholt 2019", calendarPeriod,
@@ -81,10 +83,11 @@ public class BruderschaftCalendarTest {
 	@Test
 	public void canCreateBruderschaft2018Calendar() throws IOException {
 		
+		
 		// categories
 		FileInputStream categoryFormattingCsvFile = new FileInputStream(
-				"src/main/resources/eventcategory/eventcategories.csv");
-		EventCategoriesFormatting eventCategoriesFormatting = EventCategoriesFormattingCsvReader
+				"src/main/resources/activities/activities.csv");
+		EventActivititesFormatting eventCategoriesFormatting = EventActivitiesFormattingCsvReader
 				.read(categoryFormattingCsvFile);
 
 		InputStream eventsCsvFile = BruderschaftCalendarTest.class.getResourceAsStream("bruderschaft2018.csv");
