@@ -89,11 +89,13 @@ public class PdfCalendarDay {
 		Paragraph eventDescription = new Paragraph();
 		eventDescription.add(event.getDescription());
 		eventDescription.setBold();
+		eventDescription.setFontSize(7);
+		eventDescription.setCharacterSpacing(0.5f);
 		eventDescription.setTextAlignment(TextAlignment.CENTER);
 
 		Paragraph eventLocationTime = new Paragraph();
 		eventLocationTime.add(event.getLocation());
-		eventLocationTime.setFontSize(5);
+		eventLocationTime.setFontSize(5f);
 		eventLocationTime.setTextAlignment(TextAlignment.CENTER);
 
 		if (calendarDay.getCalendarEvent().getStartTime() != null) {
