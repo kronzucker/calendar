@@ -52,9 +52,18 @@ public class BruderschaftCalendarTest {
 		calendarEvents.add(new CalendarEvent(LocalDate.of(2019, 12, 22), null, "", "", EventCategory.INFO, "stmartin"));
 		calendarEvents.add(new CalendarEvent(LocalDate.of(2020, 1, 22), null, "", "", EventCategory.EVENT, "tuppen"));
 
+		Vacation vacation = Vacation.builder().
+			period("21.12.2018", "04.01.2019").
+			period("15.04.2019", "27.04.2019").
+			period("11.06.2019", "11.06.2019").
+			period("15.07.2019", "27.08.2019").
+			period("14.10.2019", "26.10.2019").
+			period("23.12.2019", "06.01.2020").
+			period("06.04.2020", "18.04.2020").build();
+		
 		CalendarPeriod calendarPeriod = CalendarPeriod.of(2019, 1, 13);
 		Calendar calendar = new Calendar("Termine Bruderschaft Lüttelbracht-Genholt 2019", calendarPeriod,
-				calendarEvents);
+				calendarEvents, vacation);
 
 		// Creating a PdfDocument object
 		File file = new File("/home/developer/test.pdf");
@@ -93,9 +102,18 @@ public class BruderschaftCalendarTest {
 		InputStream eventsCsvFile = BruderschaftCalendarTest.class.getResourceAsStream("bruderschaft2018.csv");
 		List<CalendarEvent> calendarEvents = CalendarEventsCsvReader.read(eventsCsvFile);
 
+		Vacation vacation = Vacation.builder().
+				period("21.12.2017", "04.01.2018").
+				period("15.04.2018", "27.04.2018").
+				period("11.06.2018", "11.06.2018").
+				period("15.07.2018", "27.08.2018").
+				period("14.10.2018", "26.10.2018").
+				period("23.12.2018", "06.01.2019").
+				period("06.04.2019", "18.04.2020").build();
+		
 		CalendarPeriod calendarPeriod = CalendarPeriod.of(2018, 1, 13);
 		Calendar calendar = new Calendar("Termine Bruderschaft Lüttelbracht-Genholt 2018", calendarPeriod,
-				calendarEvents);
+				calendarEvents, vacation);
 
 		// Creating a PdfDocument object
 		File file = new File("/home/developer/bruderschaft2018.pdf");

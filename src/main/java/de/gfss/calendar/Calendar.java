@@ -13,10 +13,10 @@ public class Calendar {
 	private final List<CalendarEvent> events = new ArrayList<>();
 	private final String title;
 	
-	public Calendar(String title, CalendarPeriod calendarPeriod, List<CalendarEvent> calendarEvents) {
+	public Calendar(String title, CalendarPeriod calendarPeriod, List<CalendarEvent> calendarEvents, Vacation vacation) {
 		
 		for (YearMonth yearMonth : calendarPeriod) {
-			CalendarMonth month = new CalendarMonth(yearMonth);
+			CalendarMonth month = new CalendarMonth(yearMonth, vacation);
 			months.put(yearMonth, month);
 		}
 		

@@ -12,14 +12,16 @@ public class CalendarMonth {
 	private final YearMonth yearMonth;
 	private final TreeMap<LocalDate, CalendarDay> days = new TreeMap<>();
 
-	public CalendarMonth(YearMonth yearMonth) {
+	public CalendarMonth(YearMonth yearMonth, Vacation vacation) {
 		super();
 		this.yearMonth = yearMonth;
 
 		for (int dayOfMonth = 1; dayOfMonth <= yearMonth.lengthOfMonth(); dayOfMonth++) {
 
 			LocalDate date = LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), dayOfMonth);
-			CalendarDay calendarDay = new CalendarDay(date);
+			boolean noSchoolDay = vacation.contains(date);
+			
+			CalendarDay calendarDay = new CalendarDay(date, noSchoolDay);
 			days.put(date, calendarDay);
 		}
 	}

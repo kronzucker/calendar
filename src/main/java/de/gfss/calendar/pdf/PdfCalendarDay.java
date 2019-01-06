@@ -21,6 +21,7 @@ import com.itextpdf.layout.property.TextAlignment;
 
 import de.gfss.calendar.CalendarDay;
 import de.gfss.calendar.events.CalendarEvent;
+import de.gfss.calendar.events.EventCategory;
 
 public class PdfCalendarDay {
 
@@ -52,9 +53,9 @@ public class PdfCalendarDay {
 			return;
 		}
 
-		markCalendarDayAsHoliday();
 		markCalendarDayAsWeekend();
 		markCalendarDayWithEventCategoryColor();
+		markCalendarDayAsHoliday();
 		fillIconOrDayNumber();
 		fillEventDescription();
 
@@ -136,7 +137,7 @@ public class PdfCalendarDay {
 	}
 
 	private void markCalendarDayAsHoliday() {
-		if (!calendarDay.isNrwHoliday()) {
+		if (!calendarDay.isNoSchoolDay() || calendarDay.isWeekend() || calendarDay.hasEventOfCategory(EventCategory.HOLIDAY)) {
 			return;
 		}
 
