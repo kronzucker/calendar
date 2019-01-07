@@ -1,10 +1,9 @@
 date;start_time;description;location;category;activity
 04.01.2019;;Neujahrsschießen;Schießstand;event;schiessen
 05.01.2019;;Reuver;Neujahrskonzert;info;musik
-25.01.2019;19:00;JHV;Kirche;highlight;versammlung
+25.01.2019;19:00;JHV 2019;Kirche;highlight;versammlung
 19.06.2019;20:00;Mitglieder;Schießstand;highlight;versammlung
 06.09.2019;20:00;Mitglieder;Schießstand;highlight;versammlung
-24.01.2020;19:00;JHV;Kirche;highlight;mitglieder
 03.02.2019;10:30;Vorstand;Schießstand;event;versammlung
 24.03.2019;10:30;Vorstand;Schießstand;event;versammlung
 28.04.2019;10:30;Vorstand;Schießstand;event;versammlung
@@ -28,7 +27,7 @@ date;start_time;description;location;category;activity
 30.05.2019;;SF Börholz;Klompenball;holiday;sf_sonstige
 01.06.2019;;SF Börholz;Schützenball;highlight;schuetzenfest
 02.06.2019;;SF Börholz;Festumzug;highlight;schuetzenfest
-16.06.2019;;Königsgalaball;Brüggen;highlight;schuetzenfest
+16.06.2019;;SF Brüggen;Königsgalaball;highlight;schuetzenfest
 22.06.2019;;Sommerfest GV;Genholt;info;musik
 23.06.2019;;Sommerfest GV;Genholt;info;musik
 20.06.2019;;Fronleichnam;;highlight;kirche
@@ -45,4 +44,4 @@ date;start_time;description;location;category;activity
 27.11.2019;19:00;Frauen;Dalmacija Grill;event;versammlung
 15.12.2019;;MGV;Adventssingen;info;musik
 04.01.2020;;Reuver;Neujahrskonzert;info;musik
-24.01.2020;19:00;JHV;Kirche;highlight;versammlung
+24.01.2020;19:00;JHV 2020;Kirche;highlight;versammlung
