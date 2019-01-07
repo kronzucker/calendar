@@ -45,12 +45,17 @@ public class PdfCalendarDay {
 				: eventActivitiesFormatting.ofEvent(calendarDay.getCalendarEvent());
 
 		initializeCellsAndStyles(dayWidth);
-
+		
 		// Check for Valid Date
 		if (calendarDay == null) {
 			dayNumberCell.setBorder(Border.NO_BORDER);
 			dayContentCell.setBorder(Border.NO_BORDER);
 			return;
+		}
+
+		LOG.debug(calendarDay.getDate().toString());
+		if (calendarDay.hasEvent()) {
+			LOG.debug(calendarDay.getCalendarEvent().getDescription().toString());
 		}
 
 		markCalendarDayAsWeekend();
