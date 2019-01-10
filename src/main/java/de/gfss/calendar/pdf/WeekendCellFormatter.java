@@ -8,7 +8,7 @@ import de.gfss.calendar.CalendarDay;
 
 public class WeekendCellFormatter {
 
-	private static final Color COLOR_SATURDAY = WebColors.getRGBColor("#e3e3e3"); // light gray
+	private static final Color COLOR_SATURDAY = WebColors.getRGBColor("#D6D6D6"); // light gray
 	private static final Color COLOR_SUNDAY = EventCategoryCellFormatter.COLOR_HOLIDAY;
 
 	public static void formatCell(Cell cell, CalendarDay calendarDay) {

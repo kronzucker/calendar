@@ -9,7 +9,7 @@ import de.gfss.calendar.events.EventCategory;
 
 public class EventCategoryCellFormatter {
 
-	public static final Color COLOR_HOLIDAY = WebColors.getRGBColor("#D2D2D2"); // dark gray
+	public static final Color COLOR_HOLIDAY = WebColors.getRGBColor("#C0C0C0"); // dark gray
 	private static final Color COLOR_EVENT = WebColors.getRGBColor("#FFFFCC"); // light yellow
 	private static final Color COLOR_HIGHLIGHT = WebColors.getRGBColor("#FFFF66"); // strong yellow
 
