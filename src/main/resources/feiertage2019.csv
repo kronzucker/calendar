@@ -3,10 +3,9 @@ date;start_time;description;location;category;activity
 28.02.2019;;Altweiber;;info;
 04.03.2019;;Rosenmontag;;info;
 19.04.2019;;Karfreitag;;holiday;feiertag
-09.06.2019;;Pfingsten;;holiday;feiertag
-10.06.2019;;Pfingsten;;holiday;feiertag
+10.06.2019;;Pfingstmontag;;holiday;feiertag
 20.06.2019;;Fronleichnam;;holiday;feiertag
 03.10.2019;;Tag der Einheit;;holiday;feiertag
 01.11.2019;;Allerheiligen;;holiday;feiertag
-25.12.2019;;Weihnachten;;holiday;feiertag
-26.12.2019;;Weihnachten;;holiday;feiertag
+25.12.2019;;;1. Weihnachts-feiertag;holiday;feiertag
+26.12.2019;;;2. Weihnachts-feiertag;holiday;feiertag

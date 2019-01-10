@@ -1,5 +1,5 @@
 date;start_time;description;location;category;activity
-04.01.2019;;Neujahrsschießen;Schießstand;event;schiessen
+04.01.2019;;Neujahrs-schießen;;event;schiessen
 05.01.2019;;Reuver;Neujahrskonzert;info;musik
 25.01.2019;19:00;JHV 2019;Kirche;highlight;versammlung
 19.06.2019;20:00;Mitglieder;Schießstand;highlight;versammlung
@@ -27,21 +27,24 @@ date;start_time;description;location;category;activity
 30.05.2019;;SF Börholz;Klompenball;holiday;sf_sonstige
 01.06.2019;;SF Börholz;Schützenball;highlight;schuetzenfest
 02.06.2019;;SF Börholz;Festumzug;highlight;schuetzenfest
+09.06.2019;;Vogelschuss;Born;info;sf_sonstige
 16.06.2019;;SF Brüggen;Königsgalaball;highlight;schuetzenfest
-22.06.2019;;Sommerfest GV;Genholt;info;musik
-23.06.2019;;Sommerfest GV;Genholt;info;musik
+17.06.2019;;Vogelschuss;Brüggen;info;sf_sonstige
+22.06.2019;;Sommerfest;GV Genholt;info;musik
+23.06.2019;;Sommerfest;GV Genholt;info;musik
 20.06.2019;;Fronleichnam;;highlight;kirche
 28.06.2019;;Lüttelbracht;Fässchenparty;highlight;schuetzenfest
 29.06.2019;;Lüttelbracht;Schützenball;highlight;schuetzenfest
 30.06.2019;;Lüttelbracht;Bezirksschützenfest;highlight;schuetzenfest
 01.07.2019;;Lüttelbracht;Königsgalaball;highlight;schuetzenfest
 07.07.2019;;Pfarrfest;Born;highlight;kirche
-14.09.2019;;Kevelaer;Bolzer;event;fussball
+07.09.2019;;Fussball-turnier;Bolzer;highlight;fussball
+14.09.2019;;Kevelaer;;highlight;kirche
 19.10.2019;;Senioren;;event;kaffee
-26.10.2019;;Schweineblut;;info;schweineblut
-09.11.2019;;St. Martin;Lüttelbracht-Genholt;info;stmartin
-17.11.2019;;Volkstrauertag;;highlight;kirche
-27.11.2019;19:00;Frauen;Dalmacija Grill;event;versammlung
+26.10.2019;;Schweine-blut;;info;schweineblut
+09.11.2019;;St. Martin;Lüttelbracht-Genh.;info;stmartin
+17.11.2019;;Volks-trauertag;;highlight;kirche
+27.11.2019;19:00;Frauen;Dalmacijagrill;event;versammlung
 15.12.2019;;MGV;Adventssingen;info;musik
 04.01.2020;;Reuver;Neujahrskonzert;info;musik
 24.01.2020;19:00;JHV 2020;Kirche;highlight;versammlung

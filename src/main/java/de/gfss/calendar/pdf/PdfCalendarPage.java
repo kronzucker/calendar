@@ -91,6 +91,9 @@ public class PdfCalendarPage {
 
 			Cell headerCell = new Cell(1, 2);
 			headerCell.setTextAlignment(TextAlignment.CENTER);
+			headerCell.setBold();
+			headerCell.setFontColor(WebColors.getRGBColor("#ffffff"));
+			headerCell.setBackgroundColor(WebColors.getRGBColor("#846666"));
 
 			headerCell.add(new Paragraph(monthToDisplay.getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN)));
 			table.addHeaderCell(headerCell);
