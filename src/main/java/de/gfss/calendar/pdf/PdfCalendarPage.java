@@ -66,7 +66,7 @@ public class PdfCalendarPage {
 		// Adding Table to document
 		doc.add(table);
 
-		Paragraph footerParagraph = new Paragraph("Version V0.1 07.01.2019");
+		Paragraph footerParagraph = new Paragraph("Version V0.2 10.01.2019");
 		footerParagraph.setFontSize(5);
 		doc.add(footerParagraph);
 	}

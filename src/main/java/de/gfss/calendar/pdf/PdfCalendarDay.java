@@ -114,7 +114,7 @@ public class PdfCalendarDay {
 		}
 		eventDescription.setFontSize(TEXT_HEADLINE_FONT_SIZE);
 		eventDescription.setFixedLeading(TEXT_HEADLINE_LEADING);
-		eventDescription.setCharacterSpacing(0.4f);
+		eventDescription.setCharacterSpacing(0.5f);
 		eventDescription.setTextAlignment(TextAlignment.CENTER);
 
 		Paragraph eventLocationTime = new Paragraph();

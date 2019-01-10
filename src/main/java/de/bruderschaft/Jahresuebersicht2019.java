@@ -50,11 +50,11 @@ public class Jahresuebersicht2019 {
 		CalendarPeriod firstHalfOfYear = calendarPeriod.subPeriod(0, 5);
 		CalendarPeriod secondHalfOfYear = calendarPeriod.subPeriod(6, 12);
 
-		PdfCalendarPage pdfCalendarFirstHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
+		PdfCalendarPage pdfCalendarFirstHalfYear = new PdfCalendarPage(calendar, 530, eventCategoriesFormatting,
 				firstHalfOfYear);
 		pdfCalendarFirstHalfYear.generateCalendarOn(doc);
 
-		PdfCalendarPage pdfCalendarSecondHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
+		PdfCalendarPage pdfCalendarSecondHalfYear = new PdfCalendarPage(calendar, 530, eventCategoriesFormatting,
 				secondHalfOfYear);
 		pdfCalendarSecondHalfYear.generateCalendarOn(doc);
 
