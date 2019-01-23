@@ -31,6 +31,10 @@ public class CalendarDay {
 	}
 
 	public void setCalendarEvent(CalendarEvent calendarEvent) {
+		if (this.calendarEvent != null) {
+			throw new IllegalStateException(String.format("Doppeltes Event erkannt. %s. %s", calendarEvent.toString(),
+					this.calendarEvent.toString()));
+		}
 		this.calendarEvent = calendarEvent;
 	}
 

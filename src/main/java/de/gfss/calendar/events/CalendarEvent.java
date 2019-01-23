@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 
+import org.springframework.core.style.ToStringCreator;
+
 import lombok.Builder;
 
 @Builder
@@ -53,6 +55,11 @@ public class CalendarEvent {
 	
 	public String getActivity() {
 		return activity;
+	}
+	
+	@Override
+	public String toString() {
+		return date.toString() + ":" + description;
 	}
 
 }
