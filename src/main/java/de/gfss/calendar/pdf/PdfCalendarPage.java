@@ -28,14 +28,16 @@ public class PdfCalendarPage {
 	private final float monthWidth;
 	private final EventActivititesFormatting pdfEventCategories;
 	private final CalendarPeriod displayPeriod;
+	private final String version;
 
 	public PdfCalendarPage(Calendar calendar, float calendarWidth, EventActivititesFormatting pdfEventCategories,
-			CalendarPeriod displayPeriod) {
+			CalendarPeriod displayPeriod, String version) {
 		this.calendar = calendar;
 		this.displayCalendarWidth = calendarWidth;
 		this.pdfEventCategories = pdfEventCategories;
 		this.displayPeriod = displayPeriod;
 		this.monthWidth = calendarWidth / displayPeriod.getNumberOfMonths();
+		this.version = version;
 		
 		LOG.debug("new PdfCalenderPage: {}", displayPeriod.toString());
 	}
@@ -59,7 +61,7 @@ public class PdfCalendarPage {
 		// Adding Table to document
 		doc.add(table);
 
-		Paragraph footerParagraph = new Paragraph("Version V1.0 22.01.2019");
+		Paragraph footerParagraph = new Paragraph("Version " + this.version);
 		footerParagraph.setFontSize(5);
 		doc.add(footerParagraph);
 	}

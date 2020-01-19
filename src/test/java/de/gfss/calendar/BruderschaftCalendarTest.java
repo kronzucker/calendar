@@ -74,11 +74,11 @@ public class BruderschaftCalendarTest {
 		CalendarPeriod secondHalfOfYear = calendarPeriod.subPeriod(6, 12);
 
 		PdfCalendarPage pdfCalendarFirstHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
-				firstHalfOfYear);
+				firstHalfOfYear, "V1");
 		pdfCalendarFirstHalfYear.generateCalendarOn(doc);
 
 		PdfCalendarPage pdfCalendarSecondHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
-				secondHalfOfYear);
+				secondHalfOfYear, "V1");
 		pdfCalendarSecondHalfYear.generateCalendarOn(doc);
 
 		// Closing the document
@@ -124,11 +124,11 @@ public class BruderschaftCalendarTest {
 		CalendarPeriod secondHalfOfYear = calendarPeriod.subPeriod(6, 12);
 
 		PdfCalendarPage pdfCalendarFirstHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
-				firstHalfOfYear);
+				firstHalfOfYear, "V1");
 		pdfCalendarFirstHalfYear.generateCalendarOn(doc);
 
 		PdfCalendarPage pdfCalendarSecondHalfYear = new PdfCalendarPage(calendar, 520, eventCategoriesFormatting,
-				secondHalfOfYear);
+				secondHalfOfYear, "V1");
 		pdfCalendarSecondHalfYear.generateCalendarOn(doc);
 
 		// Closing the document

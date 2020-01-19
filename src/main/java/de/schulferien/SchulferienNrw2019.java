@@ -1,4 +1,4 @@
-package de.gfss.calendar.pdf;
+package de.schulferien;
 
 import de.gfss.calendar.Vacation;
 
