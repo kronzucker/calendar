@@ -15,7 +15,7 @@ public class Bruderschaftskalender2020 {
 	public static Jahresuebersicht build() throws IOException {
 		Jahresuebersicht jahresuebersicht2020 = Jahresuebersicht.builder().jahr(2020)
 				.schulferien(SchulferienNrw2020.build()).titel("Termine Bruderschaft Lüttelbracht-Genholt 2020")
-				.version("V1.0 17.02.2020").build();
+				.version("V1.2 18.02.2020").build();
 
 		// Bruderschaftstermine
 		List<CalendarEvent> termine2019 = CalendarEventsCsvReader
